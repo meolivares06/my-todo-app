@@ -1,52 +1,31 @@
 import React from 'react';
 import './App.css';
-import { v4 } from 'node-uuid';
+import TodoList from './components/TodoList';
+import { Header, Filter, Footer } from './components/Layout';
+import FormTodo from './components/FormTodo';
+import { Provider } from "react-redux";
+import configureStore from './redux/configureStore';
 
-const Header = () => <header>
-  <h1>***My Todo List ***</h1>
-</header>;
-const Filter = () => (
-  <footer>
-    Show: All, <a href="#">Completed</a>, <a href="#">Todo</a>
-  </footer>
-);
 
-const FormTodo = () => {
-  return (
-    <form>
-      <input type="text" placeholder="..." />
-      <button >Add</button>
-    </form>
-  )
-};
+const store = configureStore();
 
-const TodoList = ({todos}) => {
-  return (
-    <ul>
-      {todos.map(todo => {
-        return <li key={todo.id}><a href="#">{todo.text}</a></li>
-      })}
-    </ul>
-  )
-}
-const todoList = [
-  { text: "Learn Redux", completed: false, id: v4() },
-  { text: "Learn RxJs", completed: false, id: v4() },
-  { text: "Learn ReactJS", completed: false, id: v4() },
-  { text: "Learn Angular", completed: false, id: v4() }
-];
+
+
+
 function App() {
   return (
     <section>
-      <Header/>
+      <Header />
       <main>
         <FormTodo />
-        <TodoList todos={todoList}/>
-        <br/>
+        <Provider store={store}>
+          <TodoList />
+        </Provider>
+        <br />
         <Filter />
-        <br/>
+        <br />
       </main>
-      <footer>Copyright: me</footer>
+      <Footer/>
     </section>
   );
 }
