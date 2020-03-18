@@ -1,25 +1,53 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { v4 } from 'node-uuid';
 
+const Header = () => <header>
+  <h1>***My Todo List ***</h1>
+</header>;
+const Filter = () => (
+  <footer>
+    Show: All, <a href="#">Completed</a>, <a href="#">Todo</a>
+  </footer>
+);
+
+const FormTodo = () => {
+  return (
+    <form>
+      <input type="text" placeholder="..." />
+      <button >Add</button>
+    </form>
+  )
+};
+
+const TodoList = ({todos}) => {
+  return (
+    <ul>
+      {todos.map(todo => {
+        return <li key={todo.id}><a href="#">{todo.text}</a></li>
+      })}
+    </ul>
+  )
+}
+const todoList = [
+  { text: "Learn Redux", completed: false, id: v4() },
+  { text: "Learn RxJs", completed: false, id: v4() },
+  { text: "Learn ReactJS", completed: false, id: v4() },
+  { text: "Learn Angular", completed: false, id: v4() }
+];
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section>
+      <Header/>
+      <main>
+        <FormTodo />
+        <TodoList todos={todoList}/>
+        <br/>
+        <Filter />
+        <br/>
+      </main>
+      <footer>Copyright: me</footer>
+    </section>
   );
 }
 
