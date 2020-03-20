@@ -17,8 +17,9 @@ function App() {
     <section>
       <Header />
       <main>
-        <FormTodo />
+
         <Provider store={store}>
+          <FormTodo />
           <TodoList />
         </Provider>
         <br />
